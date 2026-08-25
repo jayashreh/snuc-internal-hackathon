@@ -1,0 +1,60 @@
+### Section 1: Right Triangle Definitions (SOH CAH TOA)
+Trigonometric functions for an acute angle θ in a right triangle are defined as ratios of the side lengths.
+Sine (sin) = Opposite / Hypotenuse
+Cosine (cos) = Adjacent / Hypotenuse
+Tangent (tan) = Opposite / Adjacent
+The mnemonic SOH CAH TOA helps remember these fundamental ratios. The other three functions are reciprocals of these.
+
+### Section 2: Reciprocal and Quotient Identities
+The six trigonometric functions relate to each other through fundamental reciprocal and quotient identities. Whenever you are stuck, converting all functions to sine and cosine is a powerful first step.
+Reciprocal Identities:
+csc(θ) = 1 / sin(θ)
+sec(θ) = 1 / cos(θ)
+cot(θ) = 1 / tan(θ)
+Quotient Identities:
+tan(θ) = sin(θ) / cos(θ)
+cot(θ) = cos(θ) / sin(θ)
+
+### Section 3: Pythagorean Identities
+The Pythagorean identities are based on the Pythagorean theorem applied to the unit circle. Look for squared trigonometric terms to apply these.
+1. Primary Identity: sin²(θ) + cos²(θ) = 1
+2. Tangent/Secant Identity: 1 + tan²(θ) = sec²(θ) (Derived by dividing the primary identity by cos²(θ))
+3. Cotangent/Cosecant Identity: 1 + cot²(θ) = csc²(θ) (Derived by dividing the primary identity by sin²(θ))
+These can be rearranged. For example, sin²(θ) = 1 - cos²(θ).
+
+### Section 4: Even-Odd (Negative Angle) Identities
+These identities show how trigonometric functions behave with negative angles, based on their symmetry on the graph.
+Cosine and Secant are "even" functions, meaning the negative sign disappears:
+cos(-θ) = cos(θ)
+sec(-θ) = sec(θ)
+Sine, Cosecant, Tangent, and Cotangent are "odd" functions, meaning the negative sign moves to the front:
+sin(-θ) = -sin(θ)
+csc(-θ) = -csc(θ)
+tan(-θ) = -tan(θ)
+cot(-θ) = -cot(θ)
+
+### Section 5: Co-Function Identities
+Co-function identities relate the trigonometric functions of complementary angles (angles that add up to 90 degrees or π/2 radians).
+sin(π/2 - θ) = cos(θ)
+cos(π/2 - θ) = sin(θ)
+tan(π/2 - θ) = cot(θ)
+csc(π/2 - θ) = sec(θ)
+sec(π/2 - θ) = csc(θ)
+cot(π/2 - θ) = tan(θ)
+
+### Section 6: Double Angle Formulas
+Double angle formulas are used when the angle inside the trigonometric function is multiplied by two.
+Sine Double Angle: sin(2θ) = 2 * sin(θ) * cos(θ)
+Cosine Double Angle: 
+cos(2θ) = cos²(θ) - sin²(θ)
+cos(2θ) = 2cos²(θ) - 1
+cos(2θ) = 1 - 2sin²(θ)
+Tangent Double Angle: tan(2θ) = (2 * tan(θ)) / (1 - tan²(θ))
+
+### Section 7: Problem-Solving Strategy for Verifying Identities
+When verifying complex trigonometric identities or solving equations:
+Step 1: Work on the more complicated side of the equation first.
+Step 2: Look for opportunities to factor expressions, add fractions, or square a binomial.
+Step 3: Look for opportunities to use the Pythagorean identities (especially if you see terms with an exponent of 2).
+Step 4: When in doubt, convert every single term to sines and cosines using reciprocal and quotient identities.
+Step 5: Never cross the equals sign; simplify one side until it completely matches the other.
