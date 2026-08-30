@@ -29,7 +29,7 @@ if not GEMINI_API_KEY:
 
 ai_client = genai.Client(api_key=GEMINI_API_KEY)
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-3.6-flash"
 DEFAULT_DISTANCE_THRESHOLD = 0.9  # cosine distance; higher = more permissive
 REFUSAL_MESSAGE = (
     "I can only help with concepts covered in my verified course material. "
