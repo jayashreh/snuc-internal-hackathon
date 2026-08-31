@@ -1,57 +1,293 @@
-### Section 1: Right Triangle Definitions (SOH CAH TOA)
-Trigonometric functions for an acute angle θ in a right triangle are defined as ratios of the side lengths.
-Sine (sin) = Opposite / Hypotenuse
-Cosine (cos) = Adjacent / Hypotenuse
-Tangent (tan) = Opposite / Adjacent
-The mnemonic SOH CAH TOA helps remember these fundamental ratios. The other three functions are reciprocals of these.
+### Section 1: Basic Standard Integration Formulas
 
-### Section 2: Reciprocal and Quotient Identities
-The six trigonometric functions relate to each other through fundamental reciprocal and quotient identities. Whenever you are stuck, converting all functions to sine and cosine is a powerful first step.
-Reciprocal Identities:
-csc(θ) = 1 / sin(θ)
-sec(θ) = 1 / cos(θ)
-cot(θ) = 1 / tan(θ)
-Quotient Identities:
-tan(θ) = sin(θ) / cos(θ)
-cot(θ) = cos(θ) / sin(θ)
+- $\int dx = x + c$
+- $\int x^n \, dx = \frac{x^{n+1}}{n+1} + c, \quad (n \neq -1)$
+- $\int \frac{1}{x} \, dx = \log|x| + c$
+- $\int \cos x \, dx = \sin x + c$
+- $\int \sin x \, dx = -\cos x + c$
+- $\int \sec^2 x \, dx = \tan x + c$
+- $\int \csc^2 x \, dx = -\cot x + c$
+- $\int \sec x \tan x \, dx = \sec x + c$
+- $\int \csc x \cot x \, dx = -\csc x + c$
+- $\int e^x \, dx = e^x + c$
+- $\int a^x \, dx = \frac{a^x}{\log_e a} + c, \quad a > 0$
+- $\int \frac{1}{\sqrt{1-x^2}} \, dx = \sin^{-1} x + c$
+- $\int \frac{1}{1+x^2} \, dx = \tan^{-1} x + c$
+- $\int \frac{1}{x\sqrt{x^2-1}} \, dx = \sec^{-1} x + c$
+- $\int \tan x \, dx = \log|\sec x| + c$
+- $\int \cot x \, dx = \log|\sin x| + c$
+- $\int \sec x \, dx = \log|\sec x + \tan x| + c = \log\left|\tan\left(\frac{\pi}{4}+\frac{x}{2}\right)\right| + c$
+- $\int \csc x \, dx = \log|\csc x - \cot x| + c = \log\left|\tan\frac{x}{2}\right| + c$
 
-### Section 3: Pythagorean Identities
-The Pythagorean identities are based on the Pythagorean theorem applied to the unit circle. Look for squared trigonometric terms to apply these.
-1. Primary Identity: sin²(θ) + cos²(θ) = 1
-2. Tangent/Secant Identity: 1 + tan²(θ) = sec²(θ) (Derived by dividing the primary identity by cos²(θ))
-3. Cotangent/Cosecant Identity: 1 + cot²(θ) = csc²(θ) (Derived by dividing the primary identity by sin²(θ))
-These can be rearranged. For example, sin²(θ) = 1 - cos²(θ).
+### Section 2: Method of Substitution — Fundamental Types 1, 2, and 3
 
-### Section 4: Even-Odd (Negative Angle) Identities
-These identities show how trigonometric functions behave with negative angles, based on their symmetry on the graph.
-Cosine and Secant are "even" functions, meaning the negative sign disappears:
-cos(-θ) = cos(θ)
-sec(-θ) = sec(θ)
-Sine, Cosecant, Tangent, and Cotangent are "odd" functions, meaning the negative sign moves to the front:
-sin(-θ) = -sin(θ)
-csc(-θ) = -csc(θ)
-tan(-θ) = -tan(θ)
-cot(-θ) = -cot(θ)
+Type 1: When the integrand is a ratio of a function's derivative to itself.
+$$\int \frac{f'(x)}{f(x)} \, dx = \log|f(x)| + c$$
 
-### Section 5: Co-Function Identities
-Co-function identities relate the trigonometric functions of complementary angles (angles that add up to 90 degrees or π/2 radians).
-sin(π/2 - θ) = cos(θ)
-cos(π/2 - θ) = sin(θ)
-tan(π/2 - θ) = cot(θ)
-csc(π/2 - θ) = sec(θ)
-sec(π/2 - θ) = csc(θ)
-cot(π/2 - θ) = tan(θ)
+Type 2: When the integrand is a power of a function multiplied by its derivative.
+$$\int [f(x)]^n f'(x) \, dx = \frac{[f(x)]^{n+1}}{n+1} + c$$
 
-### Section 6: Double Angle Formulas
-Double angle formulas are used when the angle inside the trigonometric function is multiplied by two.
-Sine Double Angle: sin(2θ) = 2 * sin(θ) * cos(θ)
-Cosine Double Angle: 
-cos(2θ) = cos²(θ) - sin²(θ)
-cos(2θ) = 2cos²(θ) - 1
-cos(2θ) = 1 - 2sin²(θ)
-Tangent Double Angle: tan(2θ) = (2 * tan(θ)) / (1 - tan²(θ))
+Type 3: General composite substitution.
+$$\int f[g(x)] \, g'(x) \, dx$$
+- Working rule: substitute $g(x) = t$, so $g'(x)\,dx = dt$.
+- The integral reduces to $\int f(t) \, dt$.
 
-### Section 7: Problem-Solving Strategy for Verifying Identities
+### Section 3: Method of Substitution — Type 4: Polynomial Times a Linear Power
+
+Applies to integrals of the form:
+$$\int P(x) \cdot (ax+b)^n \, dx \quad \text{or} \quad \int \frac{P(x)}{(ax+b)^n} \, dx$$
+where $P(x)$ is a polynomial in $x$ and $n$ is a positive rational number.
+- Working rule: put $z = ax + b$.
+
+### Section 4: Method of Substitution — Type 5: sin f(x) or cos f(x)
+
+Applies to integrals of the form:
+$$\int \sin f(x) \, dx \quad \text{or} \quad \int \cos f(x) \, dx$$
+- Working rule: put $z = f(x)$.
+
+### Section 5: Method of Substitution — Type 6: Integrals of the Form sin^m x cos^n x
+
+Applies to:
+$$\int \sin^m x \cos^n x \, dx$$
+
+Working rule (condition-action):
+- If the power of $\sin x$ ($m$) is an odd positive integer -> substitute $z = \cos x$.
+- If the power of $\cos x$ ($n$) is an odd positive integer -> substitute $z = \sin x$.
+- If the powers of both $\sin x$ and $\cos x$ are odd positive integers -> substitute $z = \sin x$ or $z = \cos x$ (either works).
+- If neither power ($m$ nor $n$) is an odd positive integer, examine the sum $m+n$:
+  - If the sum of powers is a negative even integer -> substitute $z = \tan x$.
+  - If the sum of powers $(m+n)$ is an even positive integer and $m, n$ are integers -> express the integrand as the algebraic sum of sines and cosines of multiple angles.
+
+### Section 6: Method of Substitution — Type 7: Integrals of tan^m x sec^n x and cot^m x cosec^n x
+
+Applies to:
+$$\int \tan^m x \sec^n x \, dx \quad \text{or} \quad \int \cot^m x \csc^n x \, dx$$
+(the rule for $\tan^m x \sec^n x$ is described; the analogous rule holds for the cotangent/cosecant pair)
+
+Working rule (condition-action), for $\int \tan^m x \sec^n x \, dx$:
+- If the power of $\sec x$ ($n$) is an even positive integer -> substitute $z = \tan x$.
+- If the power of $\sec x$ is not an even positive integer, examine the power of $\tan x$ ($m$):
+  - If the power of $\tan x$ is an odd positive integer -> substitute $z = \sec x$.
+  - If the power of $\tan x$ is an even positive integer -> replace $\tan^2 x$ with $\sec^2 x - 1$, then substitute $z = \tan x$.
+- If the power of $\tan x$ is zero and the power of $\sec x$ is an odd positive integer greater than 1 -> use integration by parts.
+
+### Section 7: Standard Trigonometric Substitutions for Irrational Expressions
+
+Given a form containing the following expressions, apply the corresponding substitution:
+
+1. $\sqrt{a^2-x^2}$ or $\frac{1}{\sqrt{a^2-x^2}}$ -> put $x = a\sin\theta$ or $x = a\cos\theta$
+2. $\frac{1}{a^2+x^2}$ or $\frac{1}{\sqrt{a^2+x^2}}$ -> put $x = a\tan\theta$ or $x = a\cot\theta$
+3. $\frac{1}{\sqrt{x^2-a^2}}$ or $\sqrt{x^2-a^2}$ -> put $x = a\sec\theta$ or $x = a\csc\theta$
+4. $\sqrt{\frac{a-x}{a+x}}$ or $\sqrt{\frac{a+x}{a-x}}$ -> put $x = a\cos 2\theta$
+5. $\sqrt{\frac{x}{a-x}}$ or $\sqrt{\frac{a-x}{x}}$ -> put $x = a\sin^2\theta$ or $x = a\cos^2\theta$
+6. $\sqrt{\frac{x}{a+x}}$ or $\sqrt{\frac{1+x}{x}}$ -> put $x = a\tan^2\theta$ or $x = a\cot^2\theta$
+7. $\sqrt{\frac{x-a}{b-x}}$ or $\sqrt{(x-a)(b-x)}$ -> put $x = a\cos^2\theta + b\sin^2\theta$
+8. $\sqrt{\frac{x-a}{x-b}}$ or $\sqrt{(x-a)(x-b)}$ -> put $x = a\sec^2\theta - b\tan^2\theta$
+9. $\frac{1}{\sqrt{(x-a)(x-b)}}$ -> put $x-a = t^2$ or $x-b = t^2$
+
+### Section 8: Standard Integral Formulas Derived from Substitution — Set I (Rational Forms with x² ± a²)
+
+1. $\int \frac{dx}{x^2-a^2} = \frac{1}{2a}\log\left|\frac{x-a}{x+a}\right| + c$
+2. $\int \frac{dx}{a^2-x^2} = \frac{1}{2a}\log\left|\frac{a+x}{a-x}\right| + c$
+3. $\int \frac{dx}{x^2+a^2} = \frac{1}{a}\tan^{-1}\frac{x}{a} + c$
+
+### Section 9: Standard Integral Formulas Derived from Substitution — Set II (Forms with √(x² ± a²))
+
+1. $\int \frac{dx}{\sqrt{a^2-x^2}} = \sin^{-1}\frac{x}{a} + c$
+2. $\int \frac{dx}{\sqrt{x^2-a^2}} = \log\left|x+\sqrt{x^2-a^2}\right| + c$
+3. $\int \frac{dx}{\sqrt{x^2+a^2}} = \log\left|x+\sqrt{x^2+a^2}\right| + c$
+4. $\int \frac{dx}{x\sqrt{x^2-a^2}} = \frac{1}{a}\sec^{-1}\left|\frac{x}{a}\right| + c$
+
+### Section 10: Standard Integral Formulas Derived from Substitution — Set III (∫√(a²−x²)dx type)
+
+1. $\int \sqrt{a^2-x^2} \, dx = \frac{x}{2}\sqrt{a^2-x^2} + \frac{a^2}{2}\sin^{-1}\frac{x}{a} + c$
+2. $\int \sqrt{x^2-a^2} \, dx = \frac{x}{2}\sqrt{x^2-a^2} - \frac{a^2}{2}\log\left|x+\sqrt{x^2-a^2}\right| + c$
+3. $\int \sqrt{x^2+a^2} \, dx = \frac{x}{2}\sqrt{x^2+a^2} + \frac{a^2}{2}\log\left|x+\sqrt{x^2+a^2}\right| + c$
+
+### Section 11: Integration by Parts — Rule and Function Priority (ILATE)
+
+Integral of the product of two functions:
+$$\int f(x) \cdot g(x) \, dx = f(x) \cdot \int g(x)\, dx - \int \left\{ \frac{d}{dx} f(x) \cdot \int g(x)\, dx \right\} dx$$
+
+Equivalently:
+$$\int u \, v \, dx = u \int v \, dx - \int \left( u' \int v \, dx \right) dx$$
+
+Priority for choosing the first function $u$, given by the mnemonic **ILATE**:
+- **I**: Inverse circular (inverse trigonometric) function
+- **L**: Logarithmic function
+- **A**: Algebraic function
+- **T**: Trigonometric function
+- **E**: Exponential function
+
+Additional working notes:
+- If both functions are trigonometric, take as $v$ (the second function) whichever has the simpler integral.
+- If both functions are algebraic, take as $u$ (the first function) whichever has the simpler derivative.
+
+### Section 12: Integration by Parts — Standard Derived Forms
+
+(i) $\int e^x [f(x) + f'(x)] \, dx = e^x f(x) + c$
+
+(ii) $\int e^{mx} [m\, f(x) + f'(x)] \, dx = e^{mx} f(x) + c$
+
+(iii) $\int [x f'(x) + f(x)] \, dx = x f(x) + c$
+
+(iv) $\int e^{ax} \sin(bx+c) \, dx = e^{ax} \dfrac{\sin\left(bx+c-\tan^{-1}\frac{b}{a}\right)}{\sqrt{a^2+b^2}} + c$
+
+(v) $\int e^{ax} \cos(bx+c) \, dx = e^{ax} \dfrac{\cos\left(bx+c-\tan^{-1}\frac{b}{a}\right)}{\sqrt{a^2+b^2}} + c$
+
+### Section 13: Integration by Partial Fractions — Non-Repeating and Repeating Factors
+
+General method split by denominator type:
+
+**Type 1 — Non-repeating roots**: denominator expressed as non-repeating factors.
+$$D(x) = (x-\alpha_1)(x-\alpha_2)\cdots \quad \text{(linear factors)}$$
+$$D(x) = (ax^2+bx+c)(px^2+qx+r)\cdots \quad \text{(quadratic factors)}$$
+
+**Type 2 — Repeating factors**: denominator has repeated roots.
+$$D(x) = (x-\alpha)^{k_1}(x-\beta)^{k_2}\cdots \quad \text{(linear factors)}$$
+$$D(x) = (ax^2+bx+c)^{k_1}(px^2+qx+r)^{k_2}\cdots \quad \text{(quadratic factors)}$$
+
+Decomposition rules:
+
+(1) If the repeated factors are linear, e.g. $D(x) = (x-a)(x-b)^2(x-c)^3$:
+$$\frac{N(x)}{(x-a)(x-b)^2(x-c)^3} = \frac{A}{x-a} + \frac{B_1}{x-b} + \frac{B_2}{(x-b)^2} + \frac{C_1}{x-c} + \frac{C_2}{(x-c)^2} + \frac{C_3}{(x-c)^3}$$
+
+(2) If the function has repeated quadratic factors, e.g. $D(x) = (ax^2+bx+c)(px^2+qx+r)^2$:
+$$\frac{N(x)}{(ax^2+bx+c)(px^2+qx+r)^2} = \frac{Ax+B}{ax^2+bx+c} + \frac{P_1x+Q_1}{px^2+qx+r} + \frac{P_2x+Q_2}{(px^2+qx+r)^2}$$
+
+### Section 14: Integration of Quadratic Rational Forms — Completing the Square
+
+Applies to integrals of the form:
+$$\int \frac{dx}{ax^2+bx+c}, \quad \int \frac{dx}{\sqrt{ax^2+bx+c}}, \quad \int \sqrt{ax^2+bx+c} \, dx$$
+
+Method:
+- Make the coefficient of $x^2$ equal to 1 by factoring out $a$.
+- Complete the square by adding and subtracting the square of half the coefficient of $x$, giving the form:
+$$a\left[\left(x+\frac{b}{2a}\right)^2 + \left(\frac{c}{a} - \frac{b^2}{4a^2}\right)\right]$$
+- Reduce to one of the Set I / Set II / Set III standard forms via substitution.
+
+### Section 15: Integration of Forms (px+q)/(ax²+bx+c) and Related
+
+Applies to:
+$$\int \frac{px+q}{ax^2+bx+c} \, dx, \quad \int \frac{px+q}{\sqrt{ax^2+bx+c}} \, dx, \quad \int (px+q)\sqrt{ax^2+bx+c} \, dx$$
+
+Method: choose suitable constants $A$ and $B$ such that
+$$px+q = A \left[\frac{d}{dx}(ax^2+bx+c)\right] + B$$
+Then split the integral into a term reducible by substitution (logarithmic/power form) plus a standard form from Set I, II, or III.
+
+### Section 16: Integration of Forms (px²+qx+r)/√(ax²+bx+c)
+
+Applies to:
+$$\int \frac{px^2+qx+r}{\sqrt{ax^2+bx+c}} \, dx$$
+
+Method: choose suitable constants $A$, $B$, and $C$ such that
+$$px^2+qx+r = A(ax^2+bx+c) + B\left[\frac{d}{dx}(ax^2+bx+c)\right] + C$$
+Then integrate each resulting term separately using known standard forms.
+
+### Section 17: Integration of Forms (x² ± 1)/(x⁴+kx²+1)
+
+Applies to:
+$$\int \frac{x^2 \pm 1}{x^4+kx^2+1} \, dx$$
+
+Method:
+- Divide the numerator and denominator by $x^2$.
+- Complete the square of the denominator to obtain the form $\left(x+\frac{1}{x}\right)^2 + a$ or $\left(x-\frac{1}{x}\right)^2 + a$.
+- Evaluate using the method of substitution (let $z = x+\frac{1}{x}$ or $z = x-\frac{1}{x}$).
+
+### Section 18: Special Integration — Biquadratic Denominator Types I, II, III
+
+Applies to integrals with denominator of the form $x^4+px^2+q$.
+
+**Type I**:
+$$\int \frac{x^2+\sqrt{q}}{x^4+px^2+q} \, dx$$
+- Method: divide numerator and denominator by $x^2$.
+
+**Type II**:
+$$\int \frac{dx}{x^4+px^2+q}$$
+- Method: write in the form
+$$\frac{1}{2\sqrt{q}} \int \frac{(x^2+\sqrt{q}) - (x^2-\sqrt{q})}{x^4+px^2+q} \, dx$$
+
+**Type III**:
+$$\int \frac{x^2+r}{x^4+px^2+q} \, dx$$
+- Method: express $x^2+r$ as
+$$x^2+r = l\left(x^2+\sqrt{q}\right) + m\left(x^2-\sqrt{q}\right)$$
+where $l + m = 1$ and $\sqrt{q}(l-m) = r$.
+
+### Section 19: Integration of Trigonometric Functions — Type I: 1/(a+b cos x) Forms
+
+Applies to:
+$$\int \frac{dx}{a+b\cos x}, \quad \int \frac{dx}{a+b\sin x}, \quad \int \frac{dx}{a+b\cos x + c\sin x}$$
+
+Working rule (Weierstrass / half-angle substitution): put
+$$\sin x = \frac{2\tan\frac{x}{2}}{1+\tan^2\frac{x}{2}}, \qquad \cos x = \frac{1-\tan^2\frac{x}{2}}{1+\tan^2\frac{x}{2}}$$
+whichever is needed, and then substitute $z = \tan\frac{x}{2}$.
+
+### Section 20: Integration of Trigonometric Functions — Type II: sin x/(a sin x + b cos x) Forms
+
+Applies to:
+$$\int \frac{\sin x}{a\sin x + b\cos x} \, dx, \quad \int \frac{\cos x}{a\sin x + b\cos x} \, dx, \quad \int \frac{p\sin x + q\cos x}{a\sin x + b\cos x} \, dx$$
+
+Working rule:
+- Step 1: Set Numerator $= A\,(\text{denominator}) + B\,(\text{derivative of denominator})$, where $a \neq 0$, $b \neq 0$.
+- Step 2: Equate the coefficients of $\sin x$ and $\cos x$ to solve for $A$ and $B$.
+
+### Section 21: Integration of Trigonometric Functions — Type 3: (a sin x + b cos x + c)/(p sin x + q cos x + r)
+
+Applies to:
+$$\int \frac{a\sin x + b\cos x + c}{p\sin x + q\cos x + r} \, dx$$
+
+Working rule:
+- Write Numerator $= \lambda\,(\text{derivative of denominator}) + \mu\,(\text{denominator}) + \nu$, i.e.
+$$a\sin x + b\cos x + c = \lambda(p\cos x - q\sin x) + \mu(p\sin x + q\cos x + r) + \nu$$
+- Solve for $\lambda$, $\mu$, $\nu$ by equating coefficients, then integrate each resulting term.
+
+### Section 22: Integration of Trigonometric Functions — Type 4: Even-Power Denominator Forms
+
+Applies to forms such as:
+$$\int \frac{dx}{a\sin^2 x + b\cos^2 x}, \quad \int \frac{dx}{a+b\sin^2 x}, \quad \int \frac{dx}{a+b\cos^2 x}, \quad \int \frac{dx}{(a\sin x + b\cos x)^2}, \quad \int \frac{dx}{a + b\sin^2 x + \cos^2 x}$$
+
+Working rule:
+- Divide numerator and denominator both by $\cos^2 x$.
+- Replace $\sec^2 x$ (wherever it appears in the denominator) by $1+\tan^2 x$.
+- Substitute $\tan x = t$, so that $\sec^2 x \, dx = dt$.
+- This reduces the integral to the standard rational form $\int \frac{dt}{at^2+bt+c}$.
+
+### Section 23: Integration of Forms dx/(P√Q)
+
+Applies to:
+$$\int \frac{dx}{P\sqrt{Q}}$$
+where $P$ and $Q$ are linear or quadratic expressions in $x$.
+
+Working rule (condition-action):
+- If $Q$ is linear and $P$ is linear or quadratic -> substitute $Q = t^2$.
+- If $Q$ is quadratic and $P$ is linear -> substitute $P = \frac{1}{t}$.
+- If both $P$ and $Q$ are pure quadratics -> substitute $x = \frac{1}{t}$.
+
+### Section 24: Integration of Irrational Algebraic Functions — Substitution Classification
+
+A classification of integrand forms and the substitution to apply, for $a, b, c, d, \alpha, n \in \mathbb{R}$ unless otherwise noted:
+
+1. $f\left\{x, \left(\dfrac{ax+b}{cx+d}\right)^{\alpha/n}\right\}$
+   -> Substitute: $\dfrac{ax+b}{cx+d} = t^n$
+
+2. $f\left\{x, (ax+b)^{\alpha/n}, (ax+b)^{\beta/m}\right\}$
+   -> Substitute: $ax+b = t^p$, where $p$ is the L.C.M. of $m$ and $n$.
+
+3. $f\left\{\left(x \pm \sqrt{a^2+x^2}\right)^n\right\}$
+   -> Working rule: $x \pm \sqrt{a^2+x^2} = t$
+
+4. $\sqrt{\dfrac{1}{x^m(a+bx)^p}}$, where $m+p \in \mathbb{N}$, $m+p > 1$
+   -> Working rule: $a+bx = tx$
+
+5. $\sqrt{\dfrac{1}{\{L_1(x)\}^m \{L_2(x)\}^n}}$
+   - If $n > m$ -> substitute $\dfrac{L_1(x)}{L_2(x)} = t$
+   - If $n < m$ -> substitute $\dfrac{L_2(x)}{L_1(x)} = t$
+
+6. $\int x^m (a+bx^n)^p \, dx$
+   - If $p \in \mathbb{I}$ (an integer) -> substitute $x = t^s$, where $s$ is the L.C.M. of the denominators of $m$ and $n$.
+   - If $\dfrac{m+1}{n}$ is an integer -> substitute $a+bx^n = t^s$, where $s$ is the denominator of the fraction $p$.
+   - If $\dfrac{m+1}{n} + p$ is an integer -> substitute $ax^{-n}+b = t^s$, where $s$ is the denominator of the rational number $p$.
+### Section 23: Problem-Solving Strategy for Verifying Identities
 When verifying complex trigonometric identities or solving equations:
 Step 1: Work on the more complicated side of the equation first.
 Step 2: Look for opportunities to factor expressions, add fractions, or square a binomial.
