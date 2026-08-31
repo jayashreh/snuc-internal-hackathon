@@ -8,8 +8,8 @@ from PIL import Image
 # ---------------------------------------------------------------------------
 # 1. PAGE SETUP & GEMINI CLIENT INITIALIZATION
 # ---------------------------------------------------------------------------
-st.set_page_config(page_title="Socratic AI Tutor", page_icon="📚")
-st.title("🎓 Multimodal Socratic STEM Tutor")
+st.set_page_config(page_title="Socratic AI Tutor", page_icon="📒")
+st.title("🧭 Multimodal Socratic STEM Tutor")
 st.write("Upload a diagram or type your problem below. I will guide you without spoiling the answer!")
 
 # Load the key from an environment variable or Streamlit secrets — never hardcode
