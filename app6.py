@@ -149,11 +149,6 @@ show_debug = st.sidebar.checkbox("Show retrieval debug info", value=True)
 # ---------------------------------------------------------------------------
 # 4. CHAT SESSION STATE
 # ---------------------------------------------------------------------------
-if "chat_session" not in st.session_state:
-    st.session_state.chat_session = ai_client.chats.create(
-        model=MODEL_NAME,
-        config=types.GenerateContentConfig(system_instruction=SYSTEM_RULES),
-    )
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
