@@ -1,4 +1,5 @@
 import os
+import time
 import streamlit as st
 import chromadb
 from google import genai
@@ -27,9 +28,30 @@ if not GEMINI_API_KEY:
     )
     st.stop()
 
-ai_client = genai.Client(api_key=GEMINI_API_KEY)
-
 MODEL_NAME = "gemini-3.6-flash"
+
+def get_ai_client():
+    return genai.Client(api_key=GEMINI_API_KEY)
+def generate_with_retry(contents, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            client = get_ai_client()
+
+            return client.models.generate_content(
+                model=MODEL_NAME,
+                contents=contents
+            )
+
+        except Exception as e:
+            error_text = str(e)
+
+            if "503" in error_text or "UNAVAILABLE" in error_text:
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt)
+                    continue
+
+            raise e
+
 DEFAULT_DISTANCE_THRESHOLD = 0.9  # cosine distance; higher = more permissive
 REFUSAL_MESSAGE = (
     "I can only help with concepts covered in my verified course material. "
@@ -217,10 +239,11 @@ if user_question or image_question:
             message_parts.append(pil_image)
 
         try:
-            response = st.session_state.chat_session.send_message(message_parts)
+            response = generate_with_retry(message_parts)
             reply = response.text
+
         except Exception as e:
-            reply = f"Error generating response: {e}"
+            reply = "The AI service is temporarily busy. Please try again in a moment."
             citation = None
 
     st.session_state.last_sent_image_id = current_image_id
