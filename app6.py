@@ -149,7 +149,10 @@ for message in st.session_state.messages:
 # 5. IMAGE UPLOADER SIDEBAR
 # ---------------------------------------------------------------------------
 st.sidebar.header("Problem Image (Optional)")
-uploaded_image = st.sidebar.file_uploader("Upload a diagram / handwritten note", type=["png", "jpg", "jpeg"])
+uploaded_image = st.sidebar.file_uploader(
+    "Upload a question, diagram, or handwritten problem",
+    type=["png", "jpg", "jpeg"]
+)
 
 pil_image = None
 current_image_id = None
@@ -157,11 +160,19 @@ if uploaded_image:
     pil_image = Image.open(uploaded_image)
     st.sidebar.image(pil_image, caption="Uploaded Problem", use_container_width=True)
     current_image_id = f"{uploaded_image.name}-{uploaded_image.size}"
+if uploaded_image:
+    image_question = st.sidebar.button("Ask about this image")
+else:
+    image_question = False
 
 # ---------------------------------------------------------------------------
 # 6. USER CHAT INTERACTION
 # ---------------------------------------------------------------------------
-if user_question := st.chat_input("Ask for help on this problem..."):
+user_question = st.chat_input("Ask for help on this problem...")
+
+if user_question or image_question:
+    if not user_question:
+        user_question = "Please help me understand this problem."
     st.session_state.messages.append({"role": "user", "content": user_question})
     with st.chat_message("user"):
         st.markdown(user_question)
