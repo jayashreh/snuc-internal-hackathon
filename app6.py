@@ -168,66 +168,189 @@ else:
 # ---------------------------------------------------------------------------
 # 6. USER CHAT INTERACTION
 # ---------------------------------------------------------------------------
+
 user_question = st.chat_input("Ask for help on this problem...")
 
 if user_question or image_question:
+
+    # If the student uploaded only an image,
+    # create a simple question for the tutor.
     if not user_question:
         user_question = "Please help me understand this problem."
-    st.session_state.messages.append({"role": "user", "content": user_question})
+
+    st.session_state.messages.append(
+        {"role": "user", "content": user_question}
+    )
+
     with st.chat_message("user"):
         st.markdown(user_question)
 
-    # Query ChromaDB vector store (wrapped — some Chroma versions raise on
-    # an empty collection instead of returning empty lists)
+    # -------------------------------------------------------
+    # IMAGE UNDERSTANDING
+    # -------------------------------------------------------
+    # If an image is uploaded, first ask Gemini to identify
+    # what the image is about. This description is then used
+    # to search the verified textbook content.
+    # -------------------------------------------------------
+
+    search_query = user_question
+
+    is_new_image = (
+        pil_image is not None
+        and current_image_id != st.session_state.last_sent_image_id
+    )
+
+    if is_new_image:
+        try:
+            image_analysis_prompt = """
+Analyze this student's uploaded problem image.
+
+Identify:
+1. The subject/topic shown in the image.
+2. The type of problem or concept involved.
+3. Important keywords that would help search a textbook.
+
+Return ONLY a short search description.
+Do not solve the problem.
+Do not give the final answer.
+"""
+
+            image_analysis_response = ai_client.models.generate_content(
+                model=MODEL_NAME,
+                contents=[pil_image, image_analysis_prompt]
+            )
+
+            image_description = image_analysis_response.text.strip()
+
+            if image_description:
+                search_query = (
+                    f"{image_description}\n\n"
+                    f"Student question: {user_question}"
+                )
+
+        except Exception:
+            # If image analysis fails, keep the original
+            # text-question retrieval behavior.
+            search_query = user_question
+
+    # -------------------------------------------------------
+    # QUERY CHROMADB
+    # -------------------------------------------------------
+
     try:
         results = collection.query(
-            query_texts=[user_question],
+            query_texts=[search_query],
             n_results=min(3, chunk_count) if chunk_count else 1,
             include=["documents", "distances", "metadatas"],
         )
+
         docs = results["documents"][0] if results["documents"] else []
         distances = results["distances"][0] if results["distances"] else []
         metadatas = results["metadatas"][0] if results["metadatas"] else []
+
     except Exception:
         docs, distances, metadatas = [], [], []
 
+    # -------------------------------------------------------
+    # DEBUG INFORMATION
+    # -------------------------------------------------------
+
     if show_debug:
         with st.expander("🔍 Debug: retrieval scores", expanded=False):
+
             if docs:
                 for doc, dist, meta in zip(docs, distances, metadatas):
-                    flag = "✅ under threshold" if dist <= distance_threshold else "❌ over threshold"
-                    st.write(f"**Distance {dist:.3f}** ({flag}) — {meta.get('citation', '?')}")
-                    st.caption(doc[:200] + ("..." if len(doc) > 200 else ""))
+
+                    flag = (
+                        "✅ under threshold"
+                        if dist <= distance_threshold
+                        else "❌ over threshold"
+                    )
+
+                    st.write(
+                        f"**Distance {dist:.3f}** "
+                        f"({flag}) — "
+                        f"{meta.get('citation', '?')}"
+                    )
+
+                    st.caption(
+                        doc[:200] +
+                        ("..." if len(doc) > 200 else "")
+                    )
+
             else:
-                st.write("No chunks were returned — the knowledge base may be empty.")
+                st.write(
+                    "No chunks were returned — "
+                    "the knowledge base may be empty."
+                )
 
-    # Apply distance threshold guardrail
+    # -------------------------------------------------------
+    # CURRICULUM RELEVANCE CHECK
+    # -------------------------------------------------------
+
     if not docs or distances[0] > distance_threshold:
-        reply, citation = REFUSAL_MESSAGE, None
-    else:
-        context_text = "\n\n".join(docs)
-        citation = metadatas[0].get("citation", "Curriculum Material")
 
-        is_new_image = pil_image is not None and current_image_id != st.session_state.last_sent_image_id
+        reply = REFUSAL_MESSAGE
+        citation = None
+
+    else:
+
+        context_text = "\n\n".join(docs)
+
+        citation = metadatas[0].get(
+            "citation",
+            "Curriculum Material"
+        )
+
+        # ---------------------------------------------------
+        # SEND TEXTBOOK CONTEXT + IMAGE + QUESTION TO GEMINI
+        # ---------------------------------------------------
 
         message_parts = [
-            f"Textbook context for this question:\n{context_text}\n\nStudent question: {user_question}"
+            f"""
+Textbook context for this question:
+
+{context_text}
+
+Student question:
+{user_question}
+"""
         ]
+
         if is_new_image:
             message_parts.append(pil_image)
 
         try:
-            response = st.session_state.chat_session.send_message(message_parts)
+            response = (
+                st.session_state.chat_session.send_message(
+                    message_parts
+                )
+            )
+
             reply = response.text
+
         except Exception as e:
             reply = f"Error generating response: {e}"
             citation = None
 
+    # Remember that this image has already been processed.
     st.session_state.last_sent_image_id = current_image_id
+
+    # -------------------------------------------------------
+    # DISPLAY RESPONSE
+    # -------------------------------------------------------
 
     with st.chat_message("assistant"):
         st.markdown(reply)
+
         if citation:
             st.caption(f"Source: {citation}")
 
-    st.session_state.messages.append({"role": "assistant", "content": reply, "citation": citation})
+    st.session_state.messages.append(
+        {
+            "role": "assistant",
+            "content": reply,
+            "citation": citation
+        }
+    )
+
